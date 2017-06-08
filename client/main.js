@@ -1,0 +1,1 @@
+import '/imports/core/startup/client/index.jsx'; // Single client entry point

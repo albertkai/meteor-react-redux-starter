@@ -1,0 +1,1 @@
+import '/imports/core/startup/server'; // Single server entry point
