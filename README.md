@@ -1,7 +1,7 @@
 # Meteor + React + Redux starter
 
 This repo contains the basic setup for Meteor apps, that use React and Redux on the frontend.
-It leverage a scalable app structure, that separates the app into the feature modules, contained in
+It leverages a scalable app structure, that separates the app into a feature modules, contained in
 the imports directory
 
 ### Running
@@ -101,3 +101,5 @@ For styles 'scss' pre-processor is used.
 |   |   +-- main.js  - main server entry. generally used to import startup/sever from the 'core' module.
 
 ```
+
+P.S. Dont forget to put settings.json into .gitignore
