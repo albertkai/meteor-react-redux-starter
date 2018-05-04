@@ -1,10 +1,17 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { coreActions } from '/imports/core';
+import * as actions from '../../api/redux/actions';
 
 class HomeComponent extends PureComponent {
+
+  static propTypes = {
+    core: PropTypes.object.isRequired,
+    incrementClickCount: PropTypes.func.isRequired,
+  };
+
   render() {
     const {
       core: {
@@ -22,16 +29,8 @@ class HomeComponent extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    core: state.core.toJS(),
-  };
-};
+const mapStateToProps = state => ({ core: state.core });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(coreActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
-export const Home = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(HomeComponent);
+export const Home = connect(mapStateToProps, mapDispatchToProps)(HomeComponent)

@@ -1,13 +1,27 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { Router, Switch, Route } from 'react-router-dom';
+
+import { Home } from '../pages/Home';
+import { NotFound } from '../pages/NotFound';
 
 export class MainLayout extends PureComponent {
+
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+  };
+
   render() {
-    const { children } = this.props;
     return (
-      <div id="main-layout">
-        {React.cloneElement(children, this.props)}
-      </div>
-    )
+      <Router history={this.props.history}>
+        <div id="main-layout">
+          <Switch>
+            <Route path="/" render={props => <Home {...props} />} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </Router>
+    );
   }
 }
 

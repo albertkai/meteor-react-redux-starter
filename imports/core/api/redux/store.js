@@ -1,35 +1,20 @@
-import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
-import logger from 'redux-logger';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
-import Immutable from 'immutable';
 
-import {coreReducer} from './reducer.js';
+import { coreReducer } from './reducer.js';
 
 const middleware = [thunk];
 let devtools;
 
-const loggerImmutable = logger({
-  // Transform Immutable objects into JSON
-  stateTransformer: (state) => {
-    const newState = {};
-    for (let i of Object.keys(state)) {
-      if (Immutable.Iterable.isIterable(state[i])) {
-        newState[i] = state[i].toJS();
-      } else {
-        newState[i] = state[i];
-      }
-    }
-
-    return newState;
-  },
-});
+const logger = createLogger();
 
 if (Meteor.isDevelopment) {
   // Add any middleware for dev environment only
   if (window.devToolsExtension) {
     devtools = window.devToolsExtension();
   } else {
-    middleware.push(loggerImmutable);
+    middleware.push(logger);
     devtools = f => f;
   }
 } else {
@@ -48,4 +33,4 @@ const store = createStore(
   enhancer,
 );
 
-export {store};
+export { store };
